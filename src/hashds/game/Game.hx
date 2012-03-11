@@ -22,6 +22,10 @@ class Game
 	#if !gameFixed
 	private var _entityList:DMixList<Entity>;
 	#end
+	
+	public function _getEntityList():DMixList<Entity> {  // NOTE, for read-only purposes only!
+		return _entityList;
+	}
 
 
 	public function new() 

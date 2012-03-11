@@ -67,6 +67,7 @@ class Game
 			else if (f._secondList != null && f._matches(entity)) { // potentialally in secondlist (do not overload 2nd condition?)
 				_checkSecondListRemove(f, entity);
 			}
+			f = f.next;
 		}
 	}
 	

@@ -39,7 +39,7 @@ class Entity #if usePolygonal implements Hashable #end
 	
 	
 	#if ( component32 || component64 )
-		public var componentMask:Int;   // todo: non component32 optio;
+		public var componentMask:Int;  
 		#if component64
 		public var componentMask2:Int;
 		#end
@@ -47,7 +47,7 @@ class Entity #if usePolygonal implements Hashable #end
 	
 
 	#if ( family32 || family64 )
-		public var familyMask:Int;   // todo: non component32 optio;
+		public var familyMask:Int;  
 		#if family64
 		public var familyMask2:Int;
 		#end

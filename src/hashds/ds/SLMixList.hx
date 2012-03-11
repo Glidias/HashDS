@@ -56,7 +56,7 @@ class SLMixList<T:ISLMixNode<T>> implements haxe.rtti.Generic
 		
 		prev.next = n.next;
 		nodeRemoved.dispatch(node); 
-		n.next = null;	 // TODO:CHECK, should  ??
+		//n.next = null;	
 		return true;
 	}
 		

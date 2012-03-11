@@ -33,10 +33,13 @@ class TestSystem extends GameSystem
 
 		override public function update( dt : Int ) : Void
 		{
+			// test backward iteration with removal
 			var n:Node = p.tail;
-			while ( n != null) {	
+			var prev:Node;
+			while ( n != null) {
+				prev = n.prev;
 				_game.removeEntity(n);	
-				n = n.prev;
+				n = prev;
 			}
 		}
 	

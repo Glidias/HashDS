@@ -39,7 +39,7 @@ class MixList<T:ISLMixNode<T>> implements haxe.rtti.Generic
 	
 		if (n == head) {
 			head = node.next;
-			n.next = null; // TODO: need to null pointer?
+			//n.next = null; 
 			return true;
 		}
 		prev = n;
@@ -56,7 +56,7 @@ class MixList<T:ISLMixNode<T>> implements haxe.rtti.Generic
 		if (n == null) return false;
 		
 		prev.next = n.next;
-		n.next = null;  // TODO: need to null pointer?
+		//n.next = null; 
 		return true;
 	}
 		

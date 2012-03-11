@@ -35,7 +35,7 @@ Entity lifecycle creation/pooling:
 
 - All entities has a pool pointer to support pooling/disposal of entities.
 
-- Entities should created and initialized by factories, which normally provide a pool implementation (or a dummy pool implementation) and default constructor settings, in situations where pooling isn't required. Some basic factory implementations (like BasicEntityFactory) extending from AbstractEntityFactory are provided, and these can be used directly or composed into your own entity creation factory classes.
+- Entities should created and initialized by factories, which normally provide a pool implementation (or a dummy pool implementation) and default constructor settings, in situations where pooling isn't required. Some basic factory implementations (like BasicEntityFactory) extending from AbstractEntityFactory are provided, and these can be used directly or composed into your own game-specific entity creation factory classes.
 
 
 Misc changes:
@@ -55,9 +55,9 @@ Optional compile parameter options:
 
 - alchemy: To allow use of alchemy memory access for usePolygonal data structures.
 
-- entityOwns: To store family key nodes directly within entities without having to run through all families in the game to check for removal, or use a hash within each family data structure to lookup nodes.
+- entityOwns: To store family key nodes directly within entities without having to run through all families in the game to check for removal. Using this means that no hashes are required in the Family base class, but potentially there may be higher memory usage since each entity will store it's own family key list.
 
-- fixedGame: This can be used if you plan to set up all families and their related systems beforehand, before adding any entities, and do not intend to change the game configuration at all except for the order of systems. As such, there's no need to maintain a doubly-linked list of entities in the Game itself, so this can be removed from the compiled build with this flag.
+- fixedGame: This can be used if you plan to register all families and their related systems beforehand, before adding any entities, and do not intend to change the game configuration at all except for the running order/availability of systems. As such, there's no need to maintain a doubly-linked list of entities in the Game itself, so the global entities list gets removed from the compiled build with this flag turned on. 
 
 
 

@@ -30,7 +30,6 @@ import hashds.signals.Signal1;
 import hashds.signals.Signal2;
 import hashds.signals.Signal3;
 import hashds.signals.SignalAny;
-import hashds.signals.SignalBase;
 import haxe.rtti.Meta;
 import hashds.ds.MixList;
 import test.TestIndexableItem;
@@ -93,7 +92,7 @@ class Main
 		
 		var allocator = new Allocator<TestSLMix>(TestSLMix);
 		
-		var signals:SignalBase;
+
 		var signalsANy:SignalAny;
 		var signal0:Signal0;
 		var signal1:Signal1<Int>;

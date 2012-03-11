@@ -1,4 +1,4 @@
-HashDS is a Haxe port and modification of the Ash framework which uses an entity-component/data-oriented approach to game development instead of object oriented paradigms. 
+HashDS is a Haxe port and modification of the Ash framework, both of which uses an entity-component/data-oriented approach to game development instead of object oriented paradigms. 
 
 The Haxe port typically provides more options for strict typing, conditional compiling (to modify the default library build), optimization, inlining, among some other things. You can use this library in pure As3/Flash environment by using the available SWC builds (note: yet to be released), or create a modifiable swc build of your own with Haxe to support strictly typed components, data structures, etc. to use in Flash/As3. Alternatively, you can write your game entirely in Haxe with the Haxe code-base working closely alongside you. 
 

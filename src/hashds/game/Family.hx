@@ -121,12 +121,15 @@ class Family implements ISLMixNode<Family>
 	
 	public inline function _addIfMatch(entity:Entity):Void { 
 		if (_matches(entity)) {
-			if (_secondList == null) {
-				_confirmAddEntity(entity);
-			}
-			else {
-				_addIfMatch2(entity);
-			}
+			_doAddConfirm(entity);
+		}
+	}
+	public inline function _doAddConfirm(entity:Entity):Void {
+		if (_secondList == null) {
+			_confirmAddEntity(entity);
+		}
+		else {
+			_addIfMatch2(entity);
 		}
 	}
 	

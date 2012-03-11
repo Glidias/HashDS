@@ -38,11 +38,12 @@ Entity lifecycle creation/pooling:
 - Entities should created and initialized by factories, which normally provide a pool implementation (or a dummy pool implementation) and default constructor settings, in situations where pooling isn't required. Some basic factory implementations (like BasicEntityFactory) extending from AbstractEntityFactory are provided, and these can be used directly or composed into your own game-specific entity creation factory classes.
 
 
-Misc changes:
+Component changes:
 ---------------
 
 - No more componentAdded/componentRemoved signal triggers. Systems are now resposible for actively notifying the current game of any component (or type mask) changes made during an entity's lifespan, to reduce the overhead of the Game or families having to actively listen to entities' signals and removing these signals afterwards.
 
+- Component classes are recognised by a public static var ID:Int counter. These should not be changed but initialized once using ComponentID.next(). The integer ID is used as a key for hashing.
 
 Optional compile parameter options:
 -----------------------------------

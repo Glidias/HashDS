@@ -1,6 +1,5 @@
 package hashds.game;
 import hashds.ds.IDLMixNode;
-import hashds.ds.Indexable;
 import hashds.ds.IPrioritizable;
 
 /**
@@ -8,7 +7,7 @@ import hashds.ds.IPrioritizable;
  * @author Glidias
  */
 
-class GameSystem implements IDLMixNode<GameSystem>, implements IPrioritizable//, implements Indexable
+class GameSystem implements IDLMixNode<GameSystem>, implements IPrioritizable
 {
 	public var next:GameSystem;
 	public var prev:GameSystem;
@@ -16,7 +15,6 @@ class GameSystem implements IDLMixNode<GameSystem>, implements IPrioritizable//,
 	public function new() 
 	{
 		priority = 0;
-		index = -1;
 	}
 	
 
@@ -26,10 +24,7 @@ class GameSystem implements IDLMixNode<GameSystem>, implements IPrioritizable//,
 		 */
 		public var priority : Int;
 		
-		/**
-		 * Used internally to hold the index of this system within the game's system list.
-		 */
-		public var index:Int;
+
 		
 		/**
 		 * Called just after the system is added to the game, before any calls to the update method.

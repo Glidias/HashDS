@@ -133,7 +133,7 @@ class Family implements ISLMixNode<Family>
 		}
 	}
 	
-	public inline function _addIfMatch2(entity:Entity):Void  // optional inline?
+	public inline function _addIfMatch2(entity:Entity):Family  // optional inline?
 	{
 		var choose:Family = this;
 		var f:Family = _secondList;
@@ -145,6 +145,7 @@ class Family implements ISLMixNode<Family>
 			f = f.next;
 		}
 		choose._confirmAddEntity(entity);
+		return choose;
 	}
 	
 	public inline function _confirmAddEntity(entity:Entity):Void {

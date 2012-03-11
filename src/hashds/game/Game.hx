@@ -86,8 +86,10 @@ class Game
 			if ( !f._contains(entity)) {
 				f._addIfMatch(entity);
 			}
-			else if (f._secondList != null && f._matches(entity)) { // potentialally in secondlist (do not overload 2nd condition?)
-				f._addIfMatch2(entity);
+			else if (f._secondList != null && f._matches(entity)) { // potentialally could carry over to secondlist (do not overload 2nd condition?)
+				if ( f._addIfMatch2(entity) != f) {
+					__removeEntityFrom(f, entity);
+				}	
 			}
 			f = f.next;
 		}

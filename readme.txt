@@ -25,7 +25,7 @@ Families and data structures
 
 - Register such families directly to the game at runtime.
 
-- Compile strictly typed families and data structures with Generics within Haxe, using the existing 'ds' package, or reate your own families with other data structure approaches.  This allows you to iterate through strictly typed data without the overhead of coercing a Node's generic prev:* and next:* pointers to the given concrete type. Any other data structure type alternative (like singly-linked list) is possible.
+- Compile strictly typed families and data structures with Generics within Haxe, using the existing 'ds' package, or create your own families with other data structure approaches.  This allows you to iterate through strictly typed data without the overhead of coercing a Node's generic prev:* and next:* pointers to the given concrete type. Any other data structure type alternative (like singly-linked list) is possible.
 
 - Family now has a setupSecondList(arr:Array):Void method to support adding a secondary choice list of families to run though for exact component matches. For example, if an entity has all 5 components like Object3D, Position, Rotation, Scale , than it may end up getting registered to multiple families that uses Object3D/Position, and also another family like Object3D/Position,  and another family like Object3D/Position/Rotation, etc. To avoid this situation, you can create a an initial family with Object3D/Position,  and than use family.setupSecondList([Array of Possible Alternative Families to CHoose From]), which will attempt to find an exact sub-match if possible, else it'd use the default Object3D/Position family
 

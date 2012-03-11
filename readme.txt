@@ -19,7 +19,9 @@ Families and data structures
 -----------------------------
 - Data structure 'ds' package of Generic classes within the library, which can be used standalone without the 'game' package.
 
-- Family is now an abstract base class, which can be extended to support your own custom data structures.
+- Family is now an abstract base class, which can be extended to support your own custom data structures. 
+
+- The default on-the-fly dynamic family implementation that was used in Ash is now found in family.NodeListFamily (under the game package), which handles the NodeList and Node respectively.
 
 - Additional 32bit int type masking discriminant for Family and Entity instances, to ensure entities get registered to specific families without relying on empty dummy components and dummy node fields. 
 

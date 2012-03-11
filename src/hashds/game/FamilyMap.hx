@@ -4,10 +4,14 @@ import flash.utils.TypedDictionary;
 import hashds.ds.DLMixList;
 
 /**
- * To facilitate initialization of strictly typed/custom families.
+ * To facilitate initialization of strictly typed/custom families. Just keep using familyMap.add(familyInstance).
+ * Also make sure if the family instance has any secondList items, you set up the nested 2nd list first before adding it to the
+ * FamilyMap.
  * 
- * After adding the relavant nodeClass to the given typed family instances, use Game.registerFamilyMap(familyMap)
- * or Game.registerFamilyMaps( an array of family maps ) to register strictly typed/custom families.
+ * After setting up the map of families, use Game.registerFamilyMap(familyMap)
+ * to register the strictly typed/custom families.
+ * 
+ * Currently, I feel this is the cleanest way to handle custom families.
  * 
  * @author Glidias
  */
@@ -23,9 +27,14 @@ class FamilyMap
 		_map = new TypedDictionary<Dynamic, Family>();
 	}
 	
-	public function add(nodeClass:Dynamic, instance:Family):Void {
-		_map.set(nodeClass, instance);
+	public function add(instance:Family):Void {
+		_map.set(instance.getNodeClass(), instance);
 		_map.set(untyped instance.constructor, instance);
+		var s:Family = instance._secondList;
+		while (s != null) {
+			_map.set(s.getNodeClass(), s);
+			_map.set(untyped s.constructor, s);
+		}
 	}
 
 }

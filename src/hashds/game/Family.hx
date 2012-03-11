@@ -34,6 +34,8 @@ class Family implements ISLMixNode<Family>
 	
 	private var _gameUpdate:GameUpdate;
 	
+	private var _nodeClass:Class<Dynamic>;
+	
 	private var _inject:InjectionMapping;
 	
 	private var _typeMask:Int;
@@ -239,13 +241,14 @@ class Family implements ISLMixNode<Family>
 	
 	
 	
+	
 	public function removeNodeByKey(keyer:Dynamic):Void {
 		throw new Error("Please overwrite!");
 	}
 	
 
 	
-	public function getDataStructure(classeKey:Dynamic):Dynamic {
+	public function getDataStructure():Dynamic {
 		throw new Error("Please overwrite!");
 		return null;
 	}
@@ -278,6 +281,10 @@ class Family implements ISLMixNode<Family>
 		#end
 	}
 	
+	inline public function getNodeClass():Class<Dynamic> {
+		return _nodeClass;
+	}
+	
 	public function cleanup(classe:Class<Dynamic>):Void {
 		throw new Error("Please overwrite!");
 	}
@@ -304,6 +311,7 @@ class Family implements ISLMixNode<Family>
 	}
 	
 	private function _reflectClass(t:Class<Dynamic>):Void {
+		_nodeClass = t;
 		var dummyCheck:Dynamic = Type.createEmptyInstance(t);
 		if ( !Reflect.hasField(dummyCheck, "entity" ) ) {
 			throw new Error("Instance doesn't have entity field! "+dummyCheck);

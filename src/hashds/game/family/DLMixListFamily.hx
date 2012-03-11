@@ -41,7 +41,7 @@ class DLMixListFamily<T:(IDLMixNode<T>, IEntityMarker #if (!entityOwns && usePol
 	
 	
 	
-	override public function getDataStructure(classeKey:Dynamic):Dynamic {
+	override public function getDataStructure():Dynamic {
 		return list;
 	}
 	

@@ -115,8 +115,7 @@ class Game
 		while (iterator.hasNext() ) {
 			var key:Dynamic = iterator.next();
 			var fam:Family = map.get( key );
-			untyped _familyHash[key] = fam;
-			fam._setGameUpdate(_updateState);
+			_setFamily(key, fam);
 		}
 	}
 
@@ -125,14 +124,14 @@ class Game
 	{
 		if( _hasFamily(nodeClass) )
 		{
-			return _getFamily(nodeClass).getDataStructure(nodeClass);
+			return _getFamily(nodeClass).getDataStructure();
 		}
 		else {
 			if (!_extendsFromNode(nodeClass)) {
 				throw new Error("Class should extend from Node!!");
 			}
 			var defaultFamily : NodeListFamily = new NodeListFamily( untyped nodeClass );
-
+		
 			_setFamily( nodeClass, defaultFamily);
 
 			#if !gameFixed
@@ -143,7 +142,7 @@ class Game
 			}
 			#end
 			
-			return defaultFamily.getDataStructure(nodeClass);
+			return defaultFamily.getDataStructure();
 		}
 	}
 	

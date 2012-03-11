@@ -35,6 +35,10 @@ class Game
 		_familyHash = new Dictionary();
 		_familyList = new MixList<Family>();
 		_systemList = new DMixPriorityList<GameSystem>();
+		
+		#if !gameFixed
+		_entityList = new DMixList<Entity>();
+		#end
 	}
 	
 

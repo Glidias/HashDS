@@ -211,8 +211,8 @@ class Family implements ISLMixNode<Family>
 			return (_componentMask & entity.componentMask) != 0  && (_typeMask == 0 || (entity.typeMask & _typeMask != 0) );
 			#end
 		#else 
-			var i:InjectionMapping = _inject;
-			var doesMatch:Bool = true;
+			var doesMatch:Bool = (_typeMask == 0 || (entity.typeMask & _typeMask) != 0);
+			var i:InjectionMapping = doesMatch ? _inject : null;
 			while (i != null) {
 				if (!entity.hasComponent( i.id )) {
 					doesMatch = false;

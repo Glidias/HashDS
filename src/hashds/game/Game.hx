@@ -105,6 +105,8 @@ class Game
 			entity._removeAllFamilyKeys();
 		#end
 		#if !gameFixed _entityList.remove( entity ); #end
+		
+		entity.pool.dispose(entity);
 	}
 	
 	public function registerFamilyMap(familyMap:FamilyMap):Void {

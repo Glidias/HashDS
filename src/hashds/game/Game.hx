@@ -92,15 +92,16 @@ class Game
 		{
 			if ( f._contains( entity ) ) f.remove(entity);
 			else if (f._secondList != null && f._matches(entity) ) {  // entity is potentially inside second-list
-				f = f._secondList;
-				while ( f != null) {
-					if (f._contains(entity)) {
-						f.remove(entity);
+				var c:Family = f._secondList;
+				while ( c != null) {
+					if (c._contains(entity)) {
+						c.remove(entity);
 						break;
 					}
-					f = f.next;
+					c = c.next;
 				}
 			}
+			f = f.next;
 		}
 		#else
 			entity._removeAllFamilyKeys();

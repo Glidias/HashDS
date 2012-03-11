@@ -285,7 +285,7 @@ class Family implements ISLMixNode<Family>
 		return _nodeClass;
 	}
 	
-	public function cleanup(classe:Class<Dynamic>):Void {
+	public function cleanup():Void {
 		throw new Error("Please overwrite!");
 	}
 	

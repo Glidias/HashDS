@@ -149,18 +149,25 @@ class Game
 	}
 	
 
-	public function releaseNodeList( nodeClass : Dynamic ) : Void
+	public function releaseNodeList( nodeClass : Class<Dynamic> ) : Void
 	{
 		if( _hasFamily(nodeClass) )
 		{
 			var fam:Family = _getFamily(nodeClass);
-			fam.cleanup(nodeClass);
-			
-			untyped __delete__(_familyHash, nodeClass);
-			
-			_deleteFamily(fam);
-			
+			_doDeleteFamily(fam, nodeClass);
+			fam = fam._secondList;
+			while (fam != null) {
+				_doDeleteFamily(fam, fam.getNodeClass() );
+				fam = fam.next;
+			}
 		}
+	}
+	
+	private inline function _doDeleteFamily(fam:Family, nodeClass:Class<Dynamic>):Void {
+		fam.cleanup();
+		untyped __delete__(_familyHash, nodeClass);
+		untyped __delete__(_familyHash, untyped fam.constructor);
+		_deleteFamily(fam);
 	}
 	
 	public function addSystem(system:GameSystem, priority:Int):Void {

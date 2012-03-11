@@ -69,7 +69,7 @@ class NodeListFamily extends Family
 		}
 		
 
-		override public function cleanup(classe:Class<Dynamic>) : Void
+		override public function cleanup() : Void
 		{
 			var node:Node = list.head;
 			while(node!=null)

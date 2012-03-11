@@ -69,6 +69,15 @@ class DLMixListFamily<T:(IDLMixNode<T>, IEntityMarker #if (!entityOwns && usePol
 			pool.releaseCache();
 		}
 		
-		
+		override public function cleanup() : Void
+		{
+			var node:T = list.head;
+			while(node!=null)
+			{
+				_remove(node.entity);
+				node = node.next;
+			}
+			list.removeAll();
+		}	
 	
 }

@@ -34,6 +34,7 @@ class FamilyMap
 		while (s != null) {
 			_map.set(s.getNodeClass(), s);
 			_map.set(untyped s.constructor, s);
+			s = s.next;
 		}
 	}
 

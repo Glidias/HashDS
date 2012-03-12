@@ -1,3 +1,4 @@
 -swf9 ../libs/example_asteroids.swc
 -swf-version 10
+--no-inline
 -main examples.asteroids.MainHaxe 

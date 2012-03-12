@@ -1,5 +1,6 @@
 package hashds.game.family;
 
+import flash.errors.Error;
 import hashds.ds.DLMixPool;
 import hashds.ds.Indexable;
 import hashds.game.Family;

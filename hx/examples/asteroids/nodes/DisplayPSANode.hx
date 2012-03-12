@@ -2,6 +2,7 @@ package examples.asteroids.nodes;
 import examples.asteroids.hutils.DisplayUtils;
 import flash.display.DisplayObject;
 import hashds.components.common.oneD.Alpha;
+import hashds.components.common.oneD.Rotation;
 import hashds.components.common.twoD.Position2;
 import hashds.components.common.twoD.Rotation2;
 import hashds.components.common.twoD.Scale2;
@@ -27,7 +28,7 @@ class DisplayPSANode extends DLEntNode<DisplayPSANode>, implements IRefreshableN
 	}
 	
 	inline public function refresh():Void {
-		DisplayUtils.renderDisp(display.displayObject, DisplayUtils.POSITION | DisplayUtils.SCALE | DisplayUtils.ALPHA, null, scale, alpha.amount);
+		DisplayUtils.renderDisp(display.displayObject, (DisplayUtils.POSITION | DisplayUtils.SCALE | DisplayUtils.ALPHA), pos, 0, scale, alpha.amount);
 	}
 	inline public function nextRefresh():IRefreshableNode {
 		return next;

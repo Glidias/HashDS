@@ -1,6 +1,7 @@
 package examples.asteroids.systems
 {
 	import examples.asteroids.nodes.LifeNode;
+	import flash.utils.Dictionary;
 	import hashds.components.common.oneD.Age;
 	import hashds.ds.SLifePoolList_examples_asteroids_nodes_LifeNode;
 	import hashds.game.Game;
@@ -32,17 +33,23 @@ package examples.asteroids.systems
 			var node : LifeNode;
 			var age : Age;
 			var next:LifeNode;
-
+			
+		
+			var last:LifeNode;
 			for ( node = nodes.head; node; node = next )
 			{
 				next = node.next;
 				age = node.age;
 				age.life -= time;
-				if ( node.dead ||  age.life <= 0 )
+				if ( node.dead || age.life <= 0 )
 				{
-					_game.removeEntity(node.entity); // to check, this hangs
-					nodes.pool.putBack(node);
+					_game.removeEntity(node.entity); 
+					if (last != null) {
+						last.next = next;
+					}
+					else nodes.head = next;
 				}
+				last = node;
 			}
 		}
 

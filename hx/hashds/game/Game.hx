@@ -48,6 +48,7 @@ class Game
 		var f:Family = _familyList.head;
 		while(f!=null) 
 		{
+			//if (!f._contains(entity)) 
 			f._addIfMatch(entity);
 			f = f.next;
 		}
@@ -273,20 +274,25 @@ class Game
 		var map = familyMap._getMap();
 		var iterator:Iterator<Dynamic> = map.iterator();	
 	
+		// todo: use of typemask will not create unique key for FamilyMap! Should we use getFullyQUalifiedClassName of instance with 
+		// appended typemask value?
 		while (iterator.hasNext() ) {
 			var key:Dynamic = iterator.next();
 			var fam:Family = map.get( key );
-			fam._setGameUpdate(_updateState);
-			_setFamily(key, fam);
+
+			_setFamily(key, fam); 
 			
 			//if (!fam.isSecondary()) _familyList.add(fam)
 			//else throw
 		}
+		// assertopm fao;ed/
 		
 		var list = familyMap._list;
 		for (i in 0...list.length) {
+			list[i]._setGameUpdate(_updateState);  // for now,  set this just in case.
 			_familyList.add(list[i]);
 		}
+		
 	}
 
 
@@ -381,7 +387,7 @@ class Game
 	}
 	private inline function _setFamily(nodeClass:Class<Dynamic>, fam:Family):Void {
 		
-		
+		fam._setGameUpdate(_updateState);
 		untyped _familyHash[nodeClass] = fam;
 	}
 	private inline function _deleteFamily(fam:Family):Void {

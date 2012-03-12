@@ -1,5 +1,6 @@
 package examples.asteroids
 {
+	import examples.asteroids.nodes.MovementNode;
 	import flash.ui.Keyboard;
 	import hashds.components.common.oneD.Age;
 	import hashds.components.common.oneD.Rotation;
@@ -42,6 +43,8 @@ package examples.asteroids
 			asteroid.addComponent( Position2.get(x,y) );
 
 			asteroid.addComponent(Size.get(radius));
+			
+
 	
 			asteroid.addComponent( Rotation.get( Math.random() * Math.PI*2) );
 			
@@ -58,6 +61,7 @@ package examples.asteroids
 			game.addEntity( asteroid );
 			return asteroid;
 		}
+		
 	//public var control : MotionControls;
 	//	public var position :Position2;
 	//	public var motion : Motion;
@@ -107,9 +111,13 @@ package examples.asteroids
 		public function createUserBullet( gun : Gun, parentPosition : Position2, parentRotation:Rotation ) : Entity
 		{
 			var bullet : Entity = Entity.get();
-			bullet.typeMask |= MyCollisionGroups.BULLET;
+			bullet.typeMask |= MyCollisionGroups.PLAYER_BULLET;
 
 			bullet.addComponent( Age.get(gun.bulletLifetime) );
+			
+			bullet.addComponent( Size.get(3) );
+			
+			bullet.addComponent(Rotation.get(0)); // todo: make rotation optional for movement node!
 
 			var cos : Number = Math.cos( parentRotation.amount );
 			var sin : Number = Math.sin( parentRotation.amount );

@@ -78,6 +78,7 @@ package examples.asteroids.systems
 			
 			if( asteroids.head==null && bullets.head==null && spaceships.head!=null )
 			{
+				
 				// next level
 				var spaceship : RadialCollisionNode = spaceships.head;
 				gameState.level++;

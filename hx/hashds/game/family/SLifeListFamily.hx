@@ -1,5 +1,6 @@
 package hashds.game.family;
 
+import flash.errors.Error;
 import hashds.ds.DLMixPool;
 import hashds.ds.Indexable;
 import hashds.game.Family;
@@ -38,7 +39,9 @@ class SLifeListFamily<T:(ISLMixNode<T>, IDead, IEntityMarker #if (!entityOwns &&
 	override public function add(ent:Entity):Dynamic {
 		var node : T = list.pool.get();
 		injectIntoNode(node, ent);
+		
 		list.add( node );
+	
 		return node;
 	}
 	
@@ -50,6 +53,7 @@ class SLifeListFamily<T:(ISLMixNode<T>, IDead, IEntityMarker #if (!entityOwns &&
 	override public function removeNodeByKey(keyer:Dynamic):Void {
 		var key:T  =  keyer;
 		list.remove( key );
+
 	}	
 	
 	override public function cleanup() : Void

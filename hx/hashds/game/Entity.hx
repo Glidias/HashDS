@@ -192,17 +192,35 @@ class Entity #if usePolygonal implements Hashable #end
 	
 
 	#if !usePolygonal inline #end 
-	public  function addComponent(comp:Dynamic, classe:Dynamic = null):Void {
+	public function addComponent(comp:Dynamic, classe:Dynamic = null):Void {
+		var ider:Int = (classe == null ? comp.constructor : classe).ID;
+		#if (component32 || component64)
+			#if (component64)
+			if (ider < 32) componentMask2 |= (1<<(ider&31));
+			#else
+			componentMask |= (1<<ider);
+			#end
+		#end
+		
 		#if usePolygonal
-		componentHash.set( (classe == null ? comp.constructor : classe).ID, comp);
+		componentHash.set( ider, comp);
 		#else
-		untyped componentHash[ (classe == null ? comp.constructor : classe).ID ] = comp;
+		untyped componentHash[ ider ] = comp;
 		#end
 	}	
 	
 
 	public inline function removeComponent(classe:Dynamic):Void {
 		var ider:Int = classe.ID;
+		
+		#if (component32 || component64)
+			#if (component64)
+			if (ider < 32) componentMask2 &= ~(1<<(ider&31));
+			#else
+			componentMask &= ~(1<<ider);
+			#end
+		#end
+		
 		#if usePolygonal
 		componentHash.remove(ider);
 		#else

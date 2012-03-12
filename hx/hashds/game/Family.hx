@@ -310,9 +310,17 @@ class Family implements ISLMixNode<Family>
 		untyped node["entity"] = entity;
 		var i:InjectionMapping = _inject;
 		while (i != null) {
+			
 			untyped node[i.name] =  entity.getComponent(i.id);
+			#if debug
+			if (untyped node[i.name] == null) throw new Error("Component injection failed!"+i.name +", into:"+node);
+			#end
 			i = i.next;
 		}
+		
+		#if debug
+		if (entity == null) throw new Error("Entity is null!");
+		#end
 		
 		#if !entityOwns
 			#if usePolygonal

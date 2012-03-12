@@ -10,7 +10,7 @@ import haxe.rtti.Generic;
 
 
 /**
- * ...
+ * Family that uses DLMixList, the strictly-typed generic version of NodeList.
  * @author Glidias
  */
 

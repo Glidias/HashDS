@@ -8,6 +8,9 @@ class MixPool<T:ISLMixNode<T>> implements haxe.rtti.Generic
 {
 	private var _pool:T;
 	private var _C:Class<T>;
+	inline public function getClass():Class<T> {
+		return _C;
+	}
 
 	public function new(C:Class<T>) 
 	{

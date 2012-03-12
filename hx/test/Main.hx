@@ -1,18 +1,29 @@
 package test;
 
+import examples.asteroids.nodes.DisplayPSANode;
+import examples.asteroids.nodes.LifeNode;
+import examples.asteroids.nodes.RadialCollisionNode;
+import examples.asteroids.systems.DisplaySystem;
 import flash.errors.Error;
 import flash.Lib;
 import flash.utils.Dictionary;
-import hashds.components.common.Position3;
-import hashds.components.common.Rotation3;
-import hashds.components.common.Scale3;
+import hashds.components.common.threeD.Position3;
+import hashds.components.common.threeD.Rotation3;
+import hashds.components.common.threeD.Scale3;
+import hashds.components.common.twoD.Position2;
 import hashds.ds.Allocator;
 import hashds.ds.DLMixList;
 import hashds.ds.DLMixPool;
 import hashds.ds.DPriorityList;
 import hashds.ds.DPriorityNode;
 import hashds.ds.MixPool;
+import hashds.ds.SLifePoolList;
+import hashds.ds.SLifePoolList;
+import hashds.ds.SLifePoolList;
 import hashds.ds.SLMixList;
+import hashds.game.family.SLifeListFamily;
+import hashds.game.nodes.DLEntNode;
+import hashds.game.nodes.SLEntLifeNode;
 import test.PNode;
 import test.PRNode;
 import test.PRSNode;
@@ -37,7 +48,7 @@ import test.TestSLMix;
 import hashds.ds.VectorIndex;
 import hashds.hutil.XYZ;
 import hashds.hutil.XYZUtils;
-import hashds.components.common.Position3;
+import hashds.components.common.threeD.Position3;
 
 
 /**
@@ -51,10 +62,15 @@ class Main
 	static function main() 
 	{
 		var mixList = new MixList<TestSLMix>();	
-		
+	
 		var mySL:TestSLMix = new TestSLMix();
 		mixList.add(mySL);
 		mixList.add(TestSLMix.get(0, 0, 13, 13, 155));
+		DisplaySystem;
+		var tester:DisplayPSANode = new DisplayPSANode();
+		var tester2 = new SLifePoolList<LifeNode>(LifeNode);
+		var tester3 = new DLMixList<RadialCollisionNode>();
+		var tester4 = new SLifeListFamily<LifeNode>(LifeNode);
 		
 		var myMixList = new SLMixList<TestSLMix>();
 		var testSL:TestSLMix = mixList.head;
@@ -62,7 +78,7 @@ class Main
 			var data1:Float = testSL.data1;
 			var data2:Float = testSL.data2;
 			testSL = testSL.next;
-			var dot:Float = XYZUtils.dotProduct(testSL, mySL); 
+			var dot:Float = XYZUtils.dotProduct3(testSL, mySL); 
 			
 			// continue
 			testSL = testSL.next; 
@@ -77,6 +93,8 @@ class Main
 		ent.addComponent( Position3.get(0, 0, 0) );
 		ent.addComponent( Rotation3.get(0, 0, 0) );
 		ent.addComponent( Scale3.get(0, 0, 0) );
+		
+		Position2;
 		
 		
 		//var dynSignal = new Signal1<Unknown<0>>();

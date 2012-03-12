@@ -1,10 +1,7 @@
 package hashds.hutil;
 
-interface XYZ 
+interface XYZ implements XY
 {
-
-	public var x:Float;
-	public var y:Float;
 	public var z:Float;
 	
 }

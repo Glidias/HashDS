@@ -1,6 +1,6 @@
-package hashds.components.common;
+package hashds.components.common.twoD;
 import hashds.game.ComponentID;
-import hashds.hutil.XYZ;
+import hashds.hutil.XY;
 import hashds.hutil.XYZUtils;
 
 /**
@@ -8,25 +8,22 @@ import hashds.hutil.XYZUtils;
  * @author Glidias
  */
 
-class Position3 implements XYZ
+class Scale2 implements XY
 {
 	public static var ID:Int = ComponentID.next();
 		
 	public var x:Float;
 	public var y:Float;
-	public var z:Float;
 	
 	private function new() {
 		
 	}
 	
 	#if inlineCompGet inline #end
-	public static function get(x:Float=0, y:Float=0, z:Float=0):Position3 {
-		var me:Position3 = new Position3();
-		XYZUtils.reset(me, x, y, z);
+	public static function get(x:Float=0, y:Float=0):Scale2 {
+		var me:Scale2 = new Scale2();
+		XYZUtils.reset2(me, x,y);
 		return me;
 	}
-	
-	
 	
 }

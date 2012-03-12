@@ -1,4 +1,5 @@
-package hashds.components.common;
+package hashds.components.common.threeD;
+import hashds.game.ComponentID;
 import hashds.hutil.XYZ;
 
 
@@ -12,5 +13,5 @@ class Tuple3 implements XYZ
 	public var x:Float;
 	public var y:Float;
 	public var z:Float;
-	
 }
+

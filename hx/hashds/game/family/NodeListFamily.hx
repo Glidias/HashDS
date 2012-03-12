@@ -7,7 +7,7 @@ import hashds.game.Family;
 import hashds.game.Node;
 
 /**
- * 
+ * Family that uses default NodeList.
  * @author Glidias
  */
 

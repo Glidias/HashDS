@@ -70,7 +70,7 @@ class Signal1<T> implements Generic
 			listenerNodePool.releaseCache();
 		}
 
-		public function add( listener :Dynamic  ) : Void
+		public function add( listener :Dynamic->Void  ) : Void
 		{
 			if( untyped nodes[ listener ] )
 			{
@@ -107,7 +107,7 @@ class Signal1<T> implements Generic
 			}
 		}
 
-		public function remove( listener : Dynamic ) : Void
+		public function remove( listener :Dynamic->Void) : Void
 		{
 			var node : ListenerNode1 = untyped nodes[ listener ];
 			if ( node!=null )

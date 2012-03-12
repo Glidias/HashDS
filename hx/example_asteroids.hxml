@@ -1,0 +1,3 @@
+-swf9 ../libs/example_asteroids.swc
+-swf-version 10
+-main examples.asteroids.MainHaxe

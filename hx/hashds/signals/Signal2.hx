@@ -70,7 +70,7 @@ class Signal2<T,U> implements Generic
 			listenerNodePool.releaseCache();
 		}
 
-		public function add( listener :Dynamic  ) : Void
+		public function add( listener :Dynamic -> Dynamic -> Void  ) : Void
 		{
 			if( untyped nodes[ listener ] )
 			{

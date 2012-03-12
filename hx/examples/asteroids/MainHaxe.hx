@@ -1,0 +1,43 @@
+package examples.asteroids;
+import examples.asteroids.systems.DisplaySystem;
+import hashds.game.Game;
+import hashds.signals.Signal0;
+import hashds.signals.Signal1;
+import hashds.signals.Signal2;
+import hashds.signals.Signal3;
+import hashds.signals.SignalAny;
+
+/**
+ * ...
+ * @author Glidias
+ */
+
+class MainHaxe 
+{
+	static function main() 
+	{
+		// Families
+		MyCollisionGroups;
+		MyFamilyMap;
+		
+		// Systems
+		DisplaySystem;
+		
+		
+		
+		// HashDS Game and Signals
+		Game;
+		Signal0;
+		Signal1;
+		Signal2;
+		Signal3;
+		SignalAny;
+		
+		
+	}
+	public function new() 
+	{
+		new Signal1<Float>();
+	}
+	
+}

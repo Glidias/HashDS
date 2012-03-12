@@ -49,12 +49,12 @@ class DisplaySystem extends GameSystem
 		
 		private function onRemovedNode(node:Dynamic):Void 
 		{
-			container.removeChild( node.display ); // untyped...darn
+			container.removeChild( node.display.displayObject ); // untyped...darn
 		}
 		
 		private function onAddedNode(node:Dynamic):Void 
 		{
-			container.addChild( node.display ); // untyped...darn
+			container.addChild( node.display.displayObject ); // untyped...darn
 		}
 	
 		override public function update( dt : Float ) : Void

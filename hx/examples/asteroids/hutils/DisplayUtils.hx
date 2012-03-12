@@ -18,7 +18,7 @@ class DisplayUtils
 	public static inline var SCALE:Int = 4;
 	public static inline var ALPHA:Int = 8;
 
-	public static inline function renderDisp(disp:DisplayObject, flags:Int, pos:XY=null, rot:Float=null, scale:XY=null, alpha:Float=1 ):Void {
+	public static inline function renderDisp(disp:DisplayObject, flags:Int, pos:XY=null, rot:Float=0, scale:XY=null, alpha:Float=1 ):Void {
 		
 		if ((flags & POSITION) !=0) {
 			disp.x = pos.x;

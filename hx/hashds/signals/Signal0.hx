@@ -69,7 +69,7 @@ class Signal0
 			listenerNodePool.releaseCache();
 		}
 
-		public function add( listener :Dynamic  ) : Void
+		public function add( listener :Void -> Void  ) : Void
 		{
 			if( untyped nodes[ listener ] )
 			{
@@ -106,7 +106,7 @@ class Signal0
 			}
 		}
 
-		public function remove( listener : Dynamic ) : Void
+		public function remove( listener :Void->Void ) : Void
 		{
 			var node : ListenerNode = untyped nodes[ listener ];
 			if ( node!=null )

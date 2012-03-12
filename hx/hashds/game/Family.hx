@@ -39,6 +39,9 @@ class Family implements ISLMixNode<Family>
 	private var _inject:InjectionMapping;
 	
 	private var _typeMask:Int;
+	public inline function _resetTypeMask(val:Int):Void {
+		_typeMask  = val;
+	}
 	
 	// Unique id key, DO not change!
 	private static var __COUNT__:Int = 0;
@@ -63,6 +66,11 @@ class Family implements ISLMixNode<Family>
 	public var _secondList:Family; 
 	
 	private var _numComponents:Int;
+	
+	private var _secondary:Bool;
+	public inline function isSecondary():Bool {
+		return _secondary;
+	}
 	
 	private function new(self:Family, typeMasking:Int=0) 
 	{
@@ -104,6 +112,7 @@ class Family implements ISLMixNode<Family>
 		var len:Int = arr.length;
 		for (i in 0...len) { 
 			var fam:Family = arr[i];
+			fam._secondary = true;
 			fam.next = _secondList;
 			_secondList = fam;
 		}	
@@ -121,8 +130,11 @@ class Family implements ISLMixNode<Family>
 	
 	public inline function _addIfMatch(entity:Entity):Void { 
 		if (_matches(entity)) {
+			
 			_doAddConfirm(entity);
 		}
+		
+		
 	}
 	public inline function _doAddConfirm(entity:Entity):Void {
 		if (_secondList == null) {
@@ -210,6 +222,7 @@ class Family implements ISLMixNode<Family>
 	}
 	
 	inline public function _matches(entity:Entity):Bool {
+		
 		#if (component32 || component64) 
 			#if (component64)
 			return  (_componentMask== 0 || (_componentMask & entity.componentMask) != 0)   && (_componentMask2 == 0 || (_componentMask2 & entity.componentMask2) != 0) && (_typeMask == 0 || (entity.typeMask & _typeMask != 0) );

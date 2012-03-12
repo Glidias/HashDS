@@ -9,16 +9,16 @@ import hashds.game.ComponentID;
 class Size 
 {
 	public static var ID:Int = ComponentID.next();		
-	public var size:Float;
+	public var radius:Float;
 	
 	public function new() 
 	{
 		
 	}
 	
-	inline public static function get(size:Float):Size {
+	inline public static function get(radius:Float):Size {
 		var me:Size = new Size();
-		me.size = size;
+		me.radius = radius;
 		return me;
 	}
 

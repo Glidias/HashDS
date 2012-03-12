@@ -23,7 +23,7 @@ class DLMixPool<T:IDLMixNode<T>> implements Generic
 	public function get():T
 	{
 		var node : T = _tail!=null ? _tail : untyped __new__(_C);
-		_tail = _tail.prev;
+		_tail = node.prev;
 		node.prev = null;
 		return node;
 	}

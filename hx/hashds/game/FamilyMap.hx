@@ -1,6 +1,7 @@
 package hashds.game;
 import flash.utils.Dictionary;
 import flash.utils.TypedDictionary;
+import flash.Vector;
 import hashds.ds.DLMixList;
 
 /**
@@ -23,17 +24,21 @@ class FamilyMap
 		return _map;
 	}
 	
+	public var _list:Vector<Family>;
+	
 	function new() {
 		_map = new TypedDictionary<Dynamic, Family>();
+		_list  = new Vector<Family>();
 	}
 	
 	public function add(instance:Family):Void {
+		_list.push(instance);
 		_map.set(instance.getNodeClass(), instance);
-		_map.set(untyped instance.constructor, instance);
+		_map.set(instance.getDataStructure().constructor, instance);
 		var s:Family = instance._secondList;
 		while (s != null) {
 			_map.set(s.getNodeClass(), s);
-			_map.set(untyped s.constructor, s);
+			_map.set(s.getDataStructure().constructor, s);
 			s = s.next;
 		}
 	}

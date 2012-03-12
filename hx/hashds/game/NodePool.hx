@@ -23,7 +23,7 @@ class NodePool
 	public function get():Node
 	{
 		var node : Node = _tail!=null ? _tail : untyped __new__(_C);
-		_tail = _tail.prev;
+		_tail = node.prev;
 		node.prev = null;
 		return node;
 	}

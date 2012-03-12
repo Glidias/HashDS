@@ -51,6 +51,7 @@ class Game
 			f._addIfMatch(entity);
 			f = f.next;
 		}
+	
 	}
 
 	public function notifyComponentsChange(entity:Entity):Void {
@@ -270,11 +271,21 @@ class Game
 	
 	public function registerFamilyMap(familyMap:FamilyMap):Void {
 		var map = familyMap._getMap();
-		var iterator:Iterator<Dynamic> = map.iterator();		
+		var iterator:Iterator<Dynamic> = map.iterator();	
+	
 		while (iterator.hasNext() ) {
 			var key:Dynamic = iterator.next();
 			var fam:Family = map.get( key );
+			fam._setGameUpdate(_updateState);
 			_setFamily(key, fam);
+			
+			//if (!fam.isSecondary()) _familyList.add(fam)
+			//else throw
+		}
+		
+		var list = familyMap._list;
+		for (i in 0...list.length) {
+			_familyList.add(list[i]);
 		}
 	}
 
@@ -286,12 +297,14 @@ class Game
 			return _getFamily(nodeClass).getDataStructure();
 		}
 		else {
-			if (!_extendsFromNode(nodeClass)) {
+			if (!_extendsFromNode(Node)) {
 				throw new Error("Class should extend from Node!!");
 			}
 			var defaultFamily : NodeListFamily = new NodeListFamily( untyped nodeClass );
 		
 			_setFamily( nodeClass, defaultFamily);
+			defaultFamily._setGameUpdate(_updateState);
+			_familyList.add(defaultFamily);
 
 			#if !gameFixed
 			var e:Entity = _entityList.head;
@@ -367,7 +380,8 @@ class Game
 		return untyped _familyHash[nodeClass];
 	}
 	private inline function _setFamily(nodeClass:Class<Dynamic>, fam:Family):Void {
-		fam._setGameUpdate(_updateState);
+		
+		
 		untyped _familyHash[nodeClass] = fam;
 	}
 	private inline function _deleteFamily(fam:Family):Void {

@@ -21,9 +21,9 @@
   <build>
     <option directives="" />
     <option flashStrict="False" />
-    <option mainClass="test.Main" />
+    <option mainClass="examples.asteroids.MainHaxe" />
     <option enabledebug="True" />
-    <option additional="-D usePolygonal&#xA;-D entityOwnsX&#xA;-D family64X&#xA;-D family32X&#xA;-D component64X&#xA;-D component32X&#xA;-D gameFixedX&#xA;-D inlineCompGet&#xA;-D inlineCompGet2X" />
+    <option additional="-D usePolygonalX&#xA;-D entityOwnsX&#xA;-D family64X&#xA;-D family32X&#xA;-D component64X&#xA;-D component32X&#xA;-D gameFixedX&#xA;-D inlineCompGet&#xA;-D inlineCompGet2X" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
@@ -33,6 +33,7 @@
   <compileTargets>
     <compile path="src\Main.hx" />
     <compile path="src\test\Main.hx" />
+    <compile path="hx\examples\asteroids\MainHaxe.hx" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

@@ -9,8 +9,8 @@ import hashds.signals.Signal1;
 
 class NodeList
 {
-	public var head:Node;
-	public var tail:Node;
+	public var head:Dynamic;
+	public var tail:Dynamic;
 	
 	public var nodeAdded:Signal1<Node>;
 	public var nodeRemoved:Signal1<Node>;

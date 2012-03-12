@@ -43,7 +43,7 @@ Entity lifecycle creation/pooling:
 Component changes:
 ---------------
 
-- No more componentAdded/componentRemoved signal triggers. Systems are now resposible for actively notifying the current game of any component (or type mask) changes made during an entity's lifespan, to reduce the overhead of the Game or families having to actively listen to entities' signals and removing these signals afterwards.
+- No more componentAdded/componentRemoved signal triggers. Systems are now resposible for actively notifying the current game of any component (or type mask) changes made during an entity's lifespan, to reduce the overhead of the Game or families having to actively listen to entities' signals and removing these signals afterwards. However, without a per-family observer approach, there might possibly be an additional overhead having to handle live entity component state changes across the entire game system from the top-down.
 
 - Component classes are recognised by a public static var ID:Int counter. These should not be changed but initialized once using ComponentID.next(). The integer ID is used as a key for hashing.
 

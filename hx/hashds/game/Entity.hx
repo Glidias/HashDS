@@ -113,7 +113,7 @@ class Entity #if usePolygonal implements Hashable #end
 			if (k.family == fam) {
 				if (lastK != null) lastK.next = k.next;
 				else _familyKeys = k.next;
-				#if (family32 || family64) k.family.cleanupEntity(this) #end
+				#if (family32 || family64) k.family._cleanupEntity(this); #end
 				k.family.removeNodeByKey(k.key);
 				k.next = _FAM_KEY_;
 				_FAM_KEY_ = k;
@@ -129,7 +129,7 @@ class Entity #if usePolygonal implements Hashable #end
 		var k:FamilyKey = _familyKeys;
 		var lastK:FamilyKey = null;
 		while (k != null) {
-			#if (family32 || family64) k.family.cleanupEntity(this) #end
+			#if (family32 || family64) k.family._cleanupEntity(this); #end
 			k.family.removeNodeByKey(k.key);
 			lastK = k;
 			k = k.next;
@@ -170,9 +170,10 @@ class Entity #if usePolygonal implements Hashable #end
 		#end
 	}
 	
-	public inline function _free():Void {
+	public inline function _free():Void {  // todo: DEBUG this gets called twice
 		#if (usePolygonal && alchemy)
 			componentHash.free();
+			componentHash = null;
 		#else
 			//componentHash = null;  // not necessary i think, since entity is already freed
 		#end
@@ -196,9 +197,10 @@ class Entity #if usePolygonal implements Hashable #end
 		var ider:Int = (classe == null ? comp.constructor : classe).ID;
 		#if (component32 || component64)
 			#if (component64)
-			if (ider < 32) componentMask2 |= (1<<(ider&31));
+			if (ider < 32) componentMask |= (1 << ider);
+			else componentMask2 |= (1<<(ider&31));
 			#else
-			componentMask |= (1<<ider);
+			componentMask |= (1 << ider);
 			#end
 		#end
 		

@@ -36,6 +36,7 @@ package examples.asteroids
 
 		public function createAsteroid( radius : Number, x : Number, y : Number ) : Entity
 		{
+			
 			var asteroid : Entity = Entity.get();
 			asteroid.typeMask |= MyCollisionGroups.ASTEROID;
 			

@@ -32,6 +32,7 @@ class SLifePoolList<T:(ISLMixNode<T>,IDead)> implements haxe.rtti.Generic
 
 	inline public function remove( node : T ) : Void
 	{
+
 		node.dead = true;
 	}
 	

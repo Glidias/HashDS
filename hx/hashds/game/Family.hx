@@ -107,6 +107,10 @@ class Family implements ISLMixNode<Family>
 		#end
 	}
 	
+	public inline function getClassName():String {
+		return Type.getClassName(getNodeClass()) + (_typeMask != 0 ? untyped _typeMask : "");
+	}
+	
 	public function setupSecondList(arr:Array<Dynamic>):Void {
 		arr.sort(_sortSecondaryChoicesMethod);
 		var len:Int = arr.length;
@@ -225,9 +229,9 @@ class Family implements ISLMixNode<Family>
 		
 		#if (component32 || component64) 
 			#if (component64)
-			return  (_componentMask== 0 || (_componentMask & entity.componentMask) != 0)   && (_componentMask2 == 0 || (_componentMask2 & entity.componentMask2) != 0) && (_typeMask == 0 || (entity.typeMask & _typeMask != 0) );
+			return  (_componentMask== 0 || (_componentMask == (entity.componentMask&_componentMask)))    && (_componentMask2 == 0 || (_componentMask2 == (entity.componentMask2&_componentMask2)) ) && (_typeMask == 0 || (entity.typeMask & _typeMask != 0) );
 			#else
-			return (_componentMask & entity.componentMask) != 0  && (_typeMask == 0 || (entity.typeMask & _typeMask != 0) );
+			return (_componentMask == (entity.componentMask&_componentMask))   && (_typeMask == 0 || (entity.typeMask & _typeMask != 0) );
 			#end
 		#else 
 			var doesMatch:Bool = (_typeMask == 0 || (entity.typeMask & _typeMask) != 0);
@@ -313,7 +317,7 @@ class Family implements ISLMixNode<Family>
 			
 			untyped node[i.name] =  entity.getComponent(i.id);
 			#if debug
-			if (untyped node[i.name] == null) throw new Error("Component injection failed!"+i.name +", into:"+node);
+			if (untyped node[i.name] == null) throw new Error("Component injection failed!"+i.name +", into:"+node #if (component32 || component64) +_componentMask + ", "+ (entity.componentMask&_componentMask) #end);
 			#end
 			i = i.next;
 		}

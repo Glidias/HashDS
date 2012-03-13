@@ -35,21 +35,41 @@ package examples.asteroids.systems
 			var next:LifeNode;
 			
 		
+			// Why singly-linked list sucks...
 			var last:LifeNode;
 			for ( node = nodes.head; node; node = next )
 			{
-				next = node.next;
+				next = node.next;  // boiler
+				
+				if (node.dead) {  // inline unhook boilerplate
+					if (last != null) {
+						last.next = next;
+					}
+					else nodes.head = next;
+					
+					nodes.pool.putBack(node);
+					continue;
+				}
+				
+				// Process
 				age = node.age;
 				age.life -= time;
-				if ( node.dead || age.life <= 0 )
+				
+	
+				if ( age.life <= 0 )   // inline unhook boilerplate + notify game to remove entity!
 				{
 					_game.removeEntity(node.entity); 
 					if (last != null) {
 						last.next = next;
 					}
 					else nodes.head = next;
+					
+					nodes.pool.putBack(node);
+					continue;
 				}
-				last = node;
+				
+	
+				last = node;  // boiler
 			}
 		}
 

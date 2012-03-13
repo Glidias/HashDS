@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Author: Richard Lord
  * Copyright (c) Big Room Ventures Ltd. 2007
  * Version: 1.0.2
@@ -24,11 +24,14 @@
  * THE SOFTWARE.
  */
 
-package examples.asteroids.input
-{
+package hashds.input;
+	#if (usePolygonal || usePolygonalKey)
+	import de.polygonal.ds.mem.ByteMemory;
+	#end
+	
+	import flash.events.IEventDispatcher;
 	import flash.events.KeyboardEvent;
 	import flash.events.Event;
-	import flash.display.DisplayObject;
 	import flash.utils.ByteArray;
 	
 	/**
@@ -43,18 +46,31 @@ package examples.asteroids.input
 	 * <p>The KeyPoll class rectifies this. It has isDown and isUp methods, each taking a key code as a 
 	 * parameter and returning a Boolean.</p>
 	 */
-	public class KeyPoll
+	/**
+	 * Integration with Polygonal DS (alchemy)
+	 * @author Glenn
+	 */
+	class KeyPoll
 	{
+		#if (usePolygonal || usePolygonalKey)
+		private var states:ByteMemory;
+		#else
 		private var states:ByteArray;
-		private var dispObj:DisplayObject;
+		#end
+		
+		private var dispObj:IEventDispatcher;
+
 		
 		/**
 		 * Constructor
 		 * 
 		 * @param displayObj a display object on which to test listen for keyboard events. To catch all key events use the stage.
 		 */
-		public function KeyPoll( displayObj:DisplayObject )
+		public function new( displayObj:IEventDispatcher )
 		{
+			#if (usePolygonal || usePolygonalKey)
+			states = new ByteMemory(32, "KeyPoll");
+			#else
 			states = new ByteArray();
 			states.writeUnsignedInt( 0 );
 			states.writeUnsignedInt( 0 );
@@ -64,37 +80,58 @@ package examples.asteroids.input
 			states.writeUnsignedInt( 0 );
 			states.writeUnsignedInt( 0 );
 			states.writeUnsignedInt( 0 );
+			#end
+			
 			dispObj = displayObj;
 			dispObj.addEventListener( KeyboardEvent.KEY_DOWN, keyDownListener, false, 0, true );
 			dispObj.addEventListener( KeyboardEvent.KEY_UP, keyUpListener, false, 0, true );
-			dispObj.addEventListener( Event.ACTIVATE, activateListener, false, 0, true );
-			dispObj.addEventListener( Event.DEACTIVATE, deactivateListener, false, 0, true );
+			dispObj.addEventListener( Event.ACTIVATE, clearListener, false, 0, true );
+			dispObj.addEventListener( Event.DEACTIVATE, clearListener, false, 0, true );
+	
 		}
 		
-		private function keyDownListener( ev:KeyboardEvent ):void
+		public function destroy():Void {
+			dispObj.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownListener);
+			dispObj.removeEventListener(KeyboardEvent.KEY_UP, keyUpListener);
+			dispObj.removeEventListener( Event.ACTIVATE, clearListener );
+			dispObj.removeEventListener( Event.DEACTIVATE, clearListener );
+			#if (usePolygonal || usePolygonalKey)
+			states.free();
+			#end
+		}
+		
+		private function keyDownListener( ev:KeyboardEvent ):Void
 		{
+			#if (usePolygonal || usePolygonalKey)
+		
+			states.set(  (ev.keyCode >>> 3),  states.get(ev.keyCode >>> 3) | (1<<(ev.keyCode & 7))  );
+			#else
 			states[ ev.keyCode >>> 3 ] |= 1 << (ev.keyCode & 7);
+			#end
 		}
 		
-		private function keyUpListener( ev:KeyboardEvent ):void
+		private function keyUpListener( ev:KeyboardEvent ):Void
 		{
+			#if (usePolygonal || usePolygonalKey)
+			states.set(  (ev.keyCode >>> 3),  states.get(ev.keyCode >>> 3) & (~(1<<(ev.keyCode & 7))) );
+			#else
 			states[ ev.keyCode >>> 3 ] &= ~(1 << (ev.keyCode & 7));
+			#end
 		}
 		
-		private function activateListener( ev:Event ):void
+		private function clearListener( ev:Event ):Void
 		{
-			for( var i:int = 0; i < 8; ++i )
-			{
+			#if (usePolygonal || usePolygonalKey)
+			var i:Int = 0;
+			while (++i < 8) {
+				states.set(i, 0);
+			}
+			#else
+			var i:Int = 0;
+			while (++i < 8) {
 				states[ i ] = 0;
 			}
-		}
-
-		private function deactivateListener( ev:Event ):void
-		{
-			for( var i:int = 0; i < 8; ++i )
-			{
-				states[ i ] = 0;
-			}
+			#end
 		}
 		
 		/**
@@ -106,9 +143,13 @@ package examples.asteroids.input
 		 *
 		 * @see isUp
 		 */
-		public function isDown( keyCode:uint ):Boolean
+		public inline function isDown( keyCode:UInt ):Bool
 		{
+			#if (usePolygonal || usePolygonalKey)
+			return (states.get(keyCode >>> 3) & (1 << (keyCode & 7)) ) != 0;
+			#else
 			return ( states[ keyCode >>> 3 ] & (1 << (keyCode & 7)) ) != 0;
+			#end
 		}
 		
 		/**
@@ -120,9 +161,13 @@ package examples.asteroids.input
 		 *
 		 * @see isDown
 		 */
-		public function isUp( keyCode:uint ):Boolean
+		public inline function isUp( keyCode:UInt ):Bool
 		{
+			#if (usePolygonal || usePolygonalKey)
+			return (states.get(keyCode >>> 3) & (1 << (keyCode & 7)) ) == 0;
+			#else
 			return ( states[ keyCode >>> 3 ] & (1 << (keyCode & 7)) ) == 0;
+			#end
 		}
-	}
+	
 }

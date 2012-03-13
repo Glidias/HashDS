@@ -1,6 +1,5 @@
 package examples.asteroids.systems
 {
-	import examples.asteroids.input.KeyPoll;
 	import hashds.components.common.twoD.Position2;
 	import hashds.game.Game;
 	import hashds.game.GameSystem;
@@ -8,9 +7,9 @@ package examples.asteroids.systems
 	import examples.asteroids.EntityCreator;
 	import examples.asteroids.components.Gun;
 	import examples.asteroids.components.GunControls;
+	import hashds.input.KeyPoll;
 
 	import examples.asteroids.nodes.GunControlNode;
-	import examples.asteroids.input.KeyPoll;
 
 	public class GunControlSystem extends GameSystem
 	{

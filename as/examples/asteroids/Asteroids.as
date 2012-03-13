@@ -4,6 +4,8 @@ package examples.asteroids
 	import examples.asteroids.systems.DisplaySystem;
 	import examples.asteroids.tick.FrameTickProvider;
 	import flash.display.DisplayObjectContainer;
+	import hashds.game.Entity;
+	import hashds.game.factory.BasicEntityFactory;
 	import hashds.game.Game;
 	import examples.asteroids.systems.CollisionSystem;
 	import examples.asteroids.systems.GameManager;
@@ -28,6 +30,9 @@ package examples.asteroids
 		
 		public function Asteroids( container : DisplayObjectContainer, width : Number, height : Number )
 		{
+			
+			Entity.FACTORY = new BasicEntityFactory();
+			
 			this.container = container;
 			this.width = width;
 			this.height = height;

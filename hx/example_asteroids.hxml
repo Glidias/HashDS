@@ -2,11 +2,12 @@
 -swf-version 10
 -main examples.asteroids.MainHaxe 
 -D usePolygonalX
+-D alchemyX
 -D entityOwnsX
 -D family64X
 -D family32X
 -D component64X
--D component32X
+-D component32
 -D gameFixedX
 -D inlineCompGet
 -D inlineCompGet2X

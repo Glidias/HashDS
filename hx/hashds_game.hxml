@@ -1,0 +1,16 @@
+-swf9 ../libs/hashds_game.swc
+-swf-version 10
+-main hashds.game.HashDSGame
+-D usePolygonalX
+-D alchemyX
+-D entityOwnsX
+-D family64X
+-D family32
+-D component64X
+-D component32
+-D gameFixedX
+-D inlineCompGetX
+-D inlineCompGet2X
+-D includeComponents1DX
+-D includeComponents2DX
+-D includeComponents3DX

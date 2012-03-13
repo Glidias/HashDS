@@ -8,7 +8,7 @@ import hashds.game.IEntityPool;
  * @author Glidias
  */
 
-class PoolEntityFactory extends EntityFactory implements IEntityPool
+class PoolEntityFactory extends EntityFactory, implements IEntityPool
 {
 	private var pool:Entity;
 

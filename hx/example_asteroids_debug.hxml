@@ -1,9 +1,10 @@
 -swf9 ../libs/example_asteroids.swc
 -swf-version 10
 --no-inline
--D debug
+-D debugX
 -main examples.asteroids.MainHaxe 
 -D usePolygonalX
+-D alchemyX
 -D entityOwnsX
 -D family64X
 -D family32X

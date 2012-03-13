@@ -21,25 +21,43 @@ class A_Tuple2 extends A_Component
 		_blockSize = BLOCK_SIZE;
 	}
 	
+	
 	@field public inline function get_x(index:Int):Float {
-		return Memory.getFloat( _mem.offset + (index << BLOCK_SHIFT) );
+		return getX(_mem.offset, index);
 	}
 	@field public inline function get_y(index:Int):Float {
-		return Memory.getFloat( _mem.offset + (index << BLOCK_SHIFT) + 1 );
+		return getY(_mem.offset, index);
 	}
-	
-	
 	public inline function set_x(index:Int, val:Float):Void {
-		Memory.setFloat( _mem.offset + (index << BLOCK_SHIFT), val );
+		setX(_mem.offset, index, val);
 	}
 	public inline function set_y(index:Int, val:Float):Void {
-		Memory.setFloat( _mem.offset + (index << BLOCK_SHIFT) + 1, val );
+		setY(_mem.offset, index, val);
+	}
+
+	
+	public inline function getX(offset:Int, index:Int):Float {
+		return Memory.getFloat( offset + (index << BLOCK_SHIFT) );
+	}
+	public inline function getY(offset:Int, index:Int):Float {
+		return Memory.getFloat( offset + (index << BLOCK_SHIFT) + 1 );
+	}
+
+	public inline function setX(offset:Int, index:Int, val:Float):Void {
+		Memory.setFloat( offset + (index << BLOCK_SHIFT), val );
+	}
+	public inline function setY(offset:Int, index:Int, val:Float):Void {
+		Memory.setFloat( offset + (index << BLOCK_SHIFT) + 1, val );
 	}
 	
 	
 	public inline function set(index:Int, x:Float, y:Float):Void {
-		set_x(index,x);
-		set_y(index,y);
+		setXY(_mem.offset, index, x, y);
+	}
+	
+	public inline function setXY(offset:Int, index:Int, x:Float, y:Float):Void {
+		setX(offset, index,x);
+		setY(offset, index,y);
 	}
 
 	

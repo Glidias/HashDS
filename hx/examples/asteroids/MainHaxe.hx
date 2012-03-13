@@ -27,6 +27,7 @@ class MainHaxe
 		
 		// HashDS
 		HashDSGame;
+
 	}
 	public function new() 
 	{

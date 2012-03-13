@@ -13,7 +13,7 @@ package examples.asteroids
 	import examples.asteroids.systems.MotionControlSystem;
 	import examples.asteroids.systems.MovementSystem;
 	import examples.asteroids.systems.SystemPriorities;
-	import examples.asteroids.input.KeyPoll;
+	import hashds.input.KeyPoll;
 
 
 

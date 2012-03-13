@@ -13,3 +13,4 @@
 -D gameFixedX
 -D inlineCompGet
 -D inlineCompGet2X
+-D usePolygonalKeyX

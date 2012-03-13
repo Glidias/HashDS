@@ -1,5 +1,6 @@
 package hashds.game;
 import hashds.game.factory.PoolEntityFactory;
+import hashds.input.KeyPoll;
 import hashds.signals.Signal0;
 import hashds.signals.Signal1;
 import hashds.signals.Signal1;
@@ -50,6 +51,9 @@ class HashDSGame
 		
 		// Factories
 		PoolEntityFactory;	
+		
+		// KeyPoll
+		KeyPoll;
 		
 		
 	}

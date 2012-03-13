@@ -63,7 +63,7 @@ class MemoryAccess implements Hashable
 	var _offset:Int;
 	var _memory:Dynamic;
 	
-	function new(bytes:Int, name = "?")
+	public function new(bytes:Int, name = "?")
 	{
 		#if debug
 		D.assert(bytes > 0, "bytes > 0");

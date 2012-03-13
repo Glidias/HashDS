@@ -29,6 +29,8 @@ import hashds.components.common.threeD.Size3;
 import hashds.components.common.threeD.Tuple3;
 #end
 
+import hashds.game.alchemy.HashDSAlchemy;
+
 /**
  * Game framework main class header of core dependencies
  * @author Glidias
@@ -54,6 +56,9 @@ class HashDSGame
 		
 		// KeyPoll
 		KeyPoll;
+		
+		//Alchemy Branch of HashDS Game
+		HashDSAlchemy;
 		
 		
 	}

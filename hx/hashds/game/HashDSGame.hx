@@ -1,4 +1,6 @@
 package hashds.game;
+import flash.errors.Error;
+import hashds.game.alchemy.nodes.A_MovementNode;
 import hashds.game.factory.PoolEntityFactory;
 import hashds.input.KeyPoll;
 import hashds.signals.Signal0;
@@ -7,6 +9,7 @@ import hashds.signals.Signal1;
 import hashds.signals.Signal2;
 import hashds.signals.Signal3;
 import hashds.signals.SignalAny;
+import haxe.rtti.Meta;
 
 #if includeComponents1D
 import hashds.components.common.oneD.Age;
@@ -60,7 +63,11 @@ class HashDSGame
 		//Alchemy Branch of HashDS Game
 		HashDSAlchemy;
 		
-		
+		var fields = Meta.getFields(A_MovementNode);
+		for (i in Reflect.fields(fields)) {
+			
+		}
+		throw new Error(Reflect.fields(fields));
 	}
 	
 	public function new() 

@@ -17,14 +17,20 @@ class A_Float extends A_Component
 		super();
 		_blockSize = BLOCK_SIZE;
 	}
+	
+	public inline function create(val:Float):Void {
+		var index:Int = getAvailableAddress();
+		set(index, val);
+	}
 
 	
-	@field public inline function get(index:Int):Float {
-		return Memory.getFloat( _mem.offset + (index << BLOCK_SHIFT) );
+	@field public inline function get(addr:Int):Float {
+		return Memory.getFloat(addr);
 	}
 	
-	@field public inline function set(index:Int, val:Float):Void {
-		Memory.setFloat(_mem.offset + (index << BLOCK_SHIFT), val );
+	public inline function set(addr:Int, val:Float):Void {
+		Memory.setFloat(addr, val);
 	}
+	
 	
 }

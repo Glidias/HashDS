@@ -18,38 +18,42 @@ class A_Tuple4 extends A_Component
 		super();
 		_blockSize = BLOCK_SIZE;
 	}
-	
-	@field public inline function get_x(index:Int):Float {
-		return Memory.getFloat( _mem.offset + (index << BLOCK_SHIFT) );
-	}
-	@field public inline function get_y(index:Int):Float {
-		return Memory.getFloat( _mem.offset + (index << BLOCK_SHIFT) + 1 );
-	}
-	@field public inline function get_z(index:Int):Float {
-		return Memory.getFloat( _mem.offset + (index << BLOCK_SHIFT) + 2 );
-	}
-	@field public inline function get_w(index:Int):Float {
-		return Memory.getFloat( _mem.offset + (index << BLOCK_SHIFT) + 3 );
+	public inline function create(x:Float, y:Float, z:Float, w:Float):Void {
+		var addr:Int = getAvailableAddress();
+		set(addr, x, y, z, w);
 	}
 	
-	public inline function set_x(index:Int, val:Float):Void {
-		Memory.setFloat( _mem.offset + (index << BLOCK_SHIFT), val );
+	@field public inline function get_x(addr:Int):Float {
+		return Memory.getFloat( addr );
 	}
-	public inline function set_y(index:Int, val:Float):Void {
-		Memory.setFloat( _mem.offset + (index << BLOCK_SHIFT) + 1, val );
+	@field public inline function get_y(addr:Int):Float {
+		return Memory.getFloat( addr + 4 );
 	}
-	public inline function set_z(index:Int, val:Float):Void {
-		Memory.setFloat( _mem.offset + (index << BLOCK_SHIFT) + 2, val );
+	@field public inline function get_z(addr:Int):Float {
+		return Memory.getFloat( addr + 8);
 	}
-	public inline function set_w(index:Int, val:Float):Void {
-		Memory.setFloat( _mem.offset + (index << BLOCK_SHIFT) + 3, val );
+	@field public inline function get_w(addr:Int):Float {
+		return Memory.getFloat( addr + 12);
 	}
 	
-	public inline function set(index:Int, x:Int, y:Int, z:Int, w:Int=0):Void {
-		set_x(index,x);
-		set_y(index,y);
-		set_z(index,z);
-		set_w(index,w);
+	public inline function set_x(addr:Int, val:Float):Void {
+		Memory.setFloat( addr, val );
+	}
+	public inline function set_y(addr:Int, val:Float):Void {
+		Memory.setFloat( addr+4, val );
+	}
+	public inline function set_z(addr:Int, val:Float):Void {
+		Memory.setFloat( addr+8, val);
+	}
+	public inline function set_w(addr:Int, val:Float):Void {
+		Memory.setFloat( addr+12, val );
+	}
+	
+	public inline function set(addr:Int, x:Float, y:Float, z:Float, w:Float=0):Void {
+		set_x(addr,x);
+		set_y(addr,y);
+		set_z(addr,z);
+		set_w(addr,w);
 	}
 	
 	

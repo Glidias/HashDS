@@ -1,4 +1,5 @@
 package hashds.game.alchemy.components.common;
+import de.polygonal.ds.mem.IntMemory;
 import flash.Memory;
 import hashds.game.alchemy.A_Component;
 
@@ -19,31 +20,34 @@ class A_Tuple3 extends A_Component
 		_blockSize = BLOCK_SIZE;
 	}
 	
-	@field public inline function get_x(index:Int):Float {
-		return Memory.getFloat( _mem.offset + (index *BLOCK_SIZE) );
-	}
-	@field public inline function get_y(index:Int):Float {
-		return Memory.getFloat( _mem.offset + (index *BLOCK_SIZE) + 1 );
-	}
-	@field public inline function get_z(index:Int):Float {
-		return Memory.getFloat( _mem.offset + (index * BLOCK_SIZE) + 2 );
-	}
-	public inline function set_x(index:Int, val:Float):Void {
-		Memory.setFloat( _mem.offset + (index *BLOCK_SIZE), val );
-	}
-	public inline function set_y(index:Int, val:Float):Void {
-		Memory.setFloat( _mem.offset + (index *BLOCK_SIZE) + 1, val );
-	}
-	public inline function set_z(index:Int, val:Float):Void {
-		Memory.setFloat( _mem.offset + (index * BLOCK_SIZE) + 2, val );
+	public inline function create(x:Float, y:Float, z:Float):Void {
+		var addr:Int = getAvailableAddress();
+		set(addr, x, y, z);
 	}
 	
-	public inline function set(index:Int, x:Float, y:Float, z:Float):Void {
-		set_x(index,x);
-		set_y(index,y);
-		set_z(index,z);
+	@field public inline function get_x(addr:Int):Float {
+		return Memory.getFloat(addr);
 	}
-		
+	@field public inline function get_y(addr:Int):Float {
+		return Memory.getFloat(addr + 4);
+	}
+	@field public inline function get_z(addr:Int):Float {
+		return Memory.getFloat(addr + 8);
+	}
+	public inline function set_x(addr:Int, val:Float):Void {
+		 Memory.setFloat(addr, val);
+	}
+	public inline function set_y(addr:Int, val:Float):Void {
+		 Memory.setFloat(addr +4, val);
+	}
+	public inline function set_z(addr:Int, val:Float):Void {
+		 Memory.setFloat(addr +8, val);
+	}
 	
+	public inline function set(addr:Int, x:Float, y:Float, z:Float):Void {
+		set_x(addr, x);
+		set_y(addr, y);
+		set_z(addr, z);
+	}
 	
 }

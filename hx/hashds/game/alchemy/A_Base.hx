@@ -38,6 +38,7 @@ class A_Base
 	public inline function getUsedBytes():Int {
 		return _mem.getUsedBytes();
 	}
+		
 
 	
 	// Other utility methods

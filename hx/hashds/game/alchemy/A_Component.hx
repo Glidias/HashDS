@@ -13,13 +13,14 @@ import hashds.game.ComponentID;
 
 class A_Component extends A_Base
 {
-	public var _index:Int;
-	
+	private var _index:Int;
+	private var _name:String;
 	
 	public function new(name:String=null) 
 	{
 		super();
-		ComponentLookup.registerComponent(this);
+		_name = name;
+		_index = ComponentLookup.registerComponent(this);
 	}
 	public inline function init(allocateNumBlocks:Int, allocateAvailIndices:Int, useExistingMem:Bool=false, existingMem:MemoryDS=null):Void {
 		_init(allocateNumBlocks, allocateAvailIndices, useExistingMem, existingMem);
@@ -29,9 +30,16 @@ class A_Component extends A_Base
 		_mem.freeAddr(addr);
 	}
 	
-	public function getKey():String {  // todo: get a unique hash key for component
-		return "";
+
+	public function getId():Int {
+		return _index;
 	}
+	
+	public inline function getName():String 
+	{
+		return _name;
+	}
+	
 	
 
 

@@ -3,7 +3,9 @@ import de.polygonal.ds.mem.IntMemory;
 import de.polygonal.ds.mem.MemoryAccess;
 
 /**
- * MemoryAccess warapper for HashDS to support pooling of available memory access data blocks within component/node framework
+ * MemoryAccess warapper for HashDS to faciliiate pooling of available memory data access blocks within component/node framework,
+ * and sharing of memory access buffer between components that have the same block size.
+ * 
  * @author Glidias
  */
 
@@ -29,10 +31,20 @@ class MemoryDS extends MemoryAccess
 		_used = 0;
 	}
 	
+	public inline function resetAvailAddrUsage():Void {
+		_ai = 0;
+	}
+	public inline function getAvailAddrUsageCount():Int {
+		return _ai;
+	}
+	public inline function getAvailAddrOffset():Int {
+		return _availAddr.offset;
+	}
+	
+	
 	
 	public inline function getAvailableAddr(blockSize:Int):Int {
-		if (_ai != 0) return (offset+_availAddr.get(--_ai));  
-		else return (offset + (_used += blockSize));
+		return _ai != 0 ? (offset + _availAddr.get(--_ai)) : (offset + (_used += blockSize));
 	}
 	
 	public inline function freeAddr(addr:Int):Void 

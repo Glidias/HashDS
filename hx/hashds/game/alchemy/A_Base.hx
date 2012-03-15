@@ -69,7 +69,7 @@ class A_Base
 		}
 	}
 	
-	// scans meta-data fields to determine block size
+	// todo: scans meta-data fields to determine block size
 	private function reflectBlockSize():Void  {
 
 	}

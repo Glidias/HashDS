@@ -7,8 +7,10 @@ import flash.Memory;
 /**
  * A node that is simply nothing more than a data structure itself in alchemy memory with
  * a fixed per-block size. Due to the fact that a node is meant for contigous data set iteration within a process, each node
- * should have it's own unique reserved MemoryDS buffer space to avoid lumping different processes together. By default,
- * a node contains an entity index id header.
+ * should have it's own unique reserved MemoryDS buffer space to avoid lumping different processes together. 
+ * 
+ * By default,  a node contains an entity index id header, so any access of addition data from an extended A_Node base class shuld include that address
+ *  offset.
  * 
  * @author Glenn Ko
  */
@@ -18,17 +20,22 @@ class A_Node extends A_Base
 
 	private static inline var HEADER_SIZE:Int = 4; 
 	private var _len:Int;
-	
-	private var _entityHash:IntIntHashTable;
-	
 	public inline function getLen():Int {
 		return _len;
 	}
 	
+	private var _entityHash:IntIntHashTable;
+	
+
 	public function new() 
 	{
 		super();
 	}
+	
+	@field public inline function getEntityHeader(addr:Int):Int {
+		return _getEntityHeader(addr);
+	}
+
 	
 	/**
 	 * 
@@ -43,9 +50,9 @@ class A_Node extends A_Base
 	
 	
 	// For clarity ... good for iteration, get start addr and end address, assuming mem.offset or usedBytes doesn't change during iteration
-	// , a possible way includes getting start and end point address, and += getBlockSize() value.
+	// , a possible way includes getting start and end point address, and += getBlockSize() value. Than the lookup address is set to +getHeaderSizeOffset();
 	public inline function getDSAddrStart():Int {
-		return getMemoryOffset() + HEADER_SIZE;
+		return getMemoryOffset();
 	}
 	public inline function getDSAddrEnd():Int {
 		return getDSAddrStart() + getUsedBytes();
@@ -53,6 +60,10 @@ class A_Node extends A_Base
 	public inline function getDSAddrLength():Int {
 		return getUsedBytes();
 	}	
+	public inline function getHeaderSizeOffset():Int {
+		return HEADER_SIZE;
+	}
+	
 	
 	private inline function _getEntityHeader(addr:Int):Int {
 		return Memory.getI32(addr);
@@ -60,6 +71,9 @@ class A_Node extends A_Base
 	private inline function _setEntityHeader(addr:Int, val:Int):Void {
 		Memory.setI32(addr, val);
 	}
+
+
+
 	
 	// WARNING: This internal method is not meant to be called by systems directly, but through the family that manages this node! 
 	public inline function _dispose(addr:Int):Void {

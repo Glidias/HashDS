@@ -64,4 +64,23 @@ Optional compile parameter options:
 
 
 
+Pure Alchemy/Haxe branch:
+-------------------------
+Currently a WIP under hashds.game.alchemy, the alchemy branch of HashDS allows for a completely data-oriented game, allowing true parallization capability of contigious homogenous data within your game.
 
+Here's what makes it different:
+	
+- No Entity class. Game stores a vector array of fast IntIntHashTables to relate a set of components to an entity. An entity is simply identified by it's index position within the vector array.
+
+-  A component is now a data structure itself. They are registered first before any families/factories are registered. They can be given a unique name, to avoid the boilerplate of dupicating/extending dummy classes. Components that consist purely of numeric data oftne uses ALchemy memory as a data structure, allowing systems to crunch numbers real fast.
+
+- Component instancse contains helper inline methods to perform operations directly on addresses within alchemy Memory, whether it be accessing a certain component data or setting up the component itself. This makes it fairly easy to retrieve values in/out of a component.
+
+- Component instances are meta-data injected into factories to facilitate adding components speedily into an entity.
+
+- Component instances are meta-data injected into system nodes to facilitiate getting component data required for the given node.
+
+- A node also acts a data structure itself, functioning purely in Alchemy memory with address integers pointing directly to the component addresses for each entity. 
+Additional getter/setter fields specific to a node can be added as well if a system needs it.
+
+- All components that function under Alchemy memory and nodes can reflect their block-size in bytes automatically, based on the fields marked with meta-data.

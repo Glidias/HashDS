@@ -64,9 +64,12 @@ class HashDSGame
 		HashDSAlchemy;
 		
 		var fields = Meta.getFields(A_MovementNode);
+
+		/*
 		for (i in Reflect.fields(fields)) {
-			
+	
 		}
+		*/
 		throw new Error(Reflect.fields(fields));
 	}
 	

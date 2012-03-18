@@ -109,7 +109,9 @@ class A_Base
 						default: throw new Error("Couldn't resolve component meta-data type:" + typer);
 				}
 			}
-			else if (Std.string(obj.component) != "undefined"  ) {   // bad hack 
+			else if (Std.string(obj.component) != "undefined"  ) {   // bad hack
+				size += 4;  
+				/*
 					var typer = Type.typeof(obj.component);
 					switch(typer  ) {
 						case ValueType.TNull:
@@ -139,7 +141,9 @@ class A_Base
 								size += 4;
 							}
 						default: throw new Error("Couldn't resolve component meta-data type:" + typer);
+						
 				}
+				*/
 			}	
 		}
 		

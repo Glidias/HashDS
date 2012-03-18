@@ -2,7 +2,9 @@ package hashds.game.alchemy;
 import de.polygonal.ds.IntIntHashTable;
 import de.polygonal.ds.mem.IntMemory;
 import flash.display.DisplayObject;
+import flash.utils.Dictionary;
 import flash.Vector;
+import hashds.ds.MixList;
 import hashds.game.alchemy.components.ds.VectorComponent;
 import hashds.game.alchemy.nodes.ExampleFactory;
 
@@ -25,6 +27,9 @@ class A_Game
 	private var _allocateEntityAmt:Int;
 	private var _entAmtGrowShift:Int;
 	
+	private var _familyList:MixList<A_Family>;
+	private var _familyHash:Dictionary;
+	
 	
 	
 	public function new(allocateEntityAmt:Int, allocateAvailIndices:Int, entHashSlotCount:Int=4, entHashCapacity:Int=4, entAmtGrowShift:Int=1) 
@@ -46,6 +51,10 @@ class A_Game
 		
 		_ai = 0;
 		_availEntIndices = new IntMemory(allocateAvailIndices);
+		
+		_familyHash = new Dictionary();
+		_familyList = new MixList<A_Family>();
+		
 	}
 	
 	public inline function getNewComponentHash():IntIntHashTable {
@@ -57,7 +66,11 @@ class A_Game
 	}
 	
 	public function registerComponentHash(hash:IntIntHashTable):Void {
-		
+		var fam:A_Family  = _familyList.head;
+		while (fam != null) {
+			fam._addIfMatchTable(hash);
+			fam = fam.next;
+		}
 	}
 	
 	private function growEntC():Void 

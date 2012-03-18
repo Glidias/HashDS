@@ -41,6 +41,8 @@ class A_Node extends A_Base
 		throw new Error("Please overwrite!");
 		return null;
 	}
+	
+
 
 	
 	/**

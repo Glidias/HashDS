@@ -7,7 +7,7 @@ package hashds.game;
 
 interface IEntityPool 
 {
-
+	
 	public function dispose(ent:Entity):Void;
 	
 	

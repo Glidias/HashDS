@@ -1,4 +1,5 @@
 package hashds.game.alchemy;
+import de.polygonal.ds.IntIntHashTable;
 import de.polygonal.ds.mem.IntMemory;
 import de.polygonal.ds.mem.MemoryAccess;
 import hashds.game.alchemy.ds.MemoryDS;
@@ -11,17 +12,23 @@ import hashds.game.ComponentID;
  * @author Glenn Ko
  */
 
-class A_Component extends A_Base
+class A_Component extends A_Base, implements IComponentDS
 {
-	private var _index:Int;
+	private var _id:Int;
 	private var _name:String;
 	
 	public function new(name:String=null) 
 	{
 		super();
 		_name = name;
-		_index = ComponentLookup.registerComponent(this);
+		_id = ComponentLookup.registerComponent(this);
 	}
+	/*
+	public function addDefault(hash:IntIntHashTable):Bool {
+		return false;
+	}
+	*/
+	
 	public inline function init(allocateNumBlocks:Int, allocateAvailIndices:Int, useExistingMem:Bool=false, existingMem:MemoryDS=null):Void {
 		_init(allocateNumBlocks, allocateAvailIndices, useExistingMem, existingMem);
 	}
@@ -30,12 +37,16 @@ class A_Component extends A_Base
 		_mem.freeAddr(addr);
 	}
 	
-
-	public function getId():Int {
-		return _index;
+	public function free(key:Int):Void {
+		_mem.freeAddr(key);
 	}
 	
-	public inline function getName():String 
+
+	public function getId():Int {
+		return _id;
+	}
+	
+	public function getName():String 
 	{
 		return _name;
 	}

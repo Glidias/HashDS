@@ -1,4 +1,5 @@
 package hashds.game.alchemy.components.common;
+import de.polygonal.ds.IntIntHashTable;
 import flash.Memory;
 import hashds.game.alchemy.A_Component;
 
@@ -13,15 +14,22 @@ class A_Tuple4 extends A_Component
 	public static inline var BLOCK_SHIFT:Int = 4;
 	public static inline var BLOCK_SIZE:Int = (1 << BLOCK_SHIFT);
 
-	public function new() 
+	public function new(name:String=null) 
 	{
-		super();
+		super(name);
 		_blockSize = BLOCK_SIZE;
 	}
-	public inline function create(x:Float, y:Float, z:Float, w:Float):Void {
+	public inline function add(hash:IntIntHashTable, x:Float=0, y:Float=0, z:Float=0, w:Float=0):Void {
 		var addr:Int = getAvailableAddress();
+		hash.set(_id, addr);
 		set(addr, x, y, z, w);
 	}
+	/*
+	override public function addDefault(hash:IntIntHashTable):Bool {
+		add(hash);
+		return true;
+	}
+	*/
 	
 	@field public inline function get_x(addr:Int):Float {
 		return Memory.getFloat( addr );

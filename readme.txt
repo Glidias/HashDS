@@ -66,7 +66,7 @@ Optional compile parameter options:
 
 Pure Alchemy/Haxe branch:
 -------------------------
-Currently a WIP under hashds.game.alchemy, the alchemy branch of HashDS allows for a completely data-oriented game, allowing true parallization capability of contigious homogenous data within your game.
+Currently a WIP under hashds.game.alchemy, the alchemy branch of HashDS allows for a completely data-oriented game, allowing true parallization capability of homogenous data within your game. The rationale behind the Alchemy branch lies in the fact that since all components and nodes are of a similar type and have the same set of variables, why have multiple instances of these instances per entity floating everywhere in memory? Why not just use 1 data-structure for each component, and 1 data structure for each node, and have them arranged in contiguous set within memory running in parallel within the game system? 
 
 Here's what makes it different:
 	
@@ -78,9 +78,9 @@ Here's what makes it different:
 
 - Component instances are meta-data injected into factories to facilitate adding components speedily into an entity.
 
-- Component instances are meta-data injected into system nodes to facilitiate getting component data required for the given node.
-
 - A node also acts a data structure itself, functioning purely in Alchemy memory with address integers pointing directly to the component addresses for each entity. 
 Additional getter/setter fields specific to a node can be added as well if a system needs it.
 
-- All components that function under Alchemy memory and nodes can reflect their block-size in bytes automatically, based on the fields marked with meta-data.
+- Component instances are meta-data injected into system nodes to facilitiate getting component data required for the given node. This is done for the convenience of systems and reflection.
+
+- All components that function under Alchemy memory and nodes can reflect their block-size in bytes automatically under a base class, based on the fields marked with meta-data. This makes it easy to create new component/node data structures that run purely under Alchemy memory.

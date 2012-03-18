@@ -37,6 +37,10 @@ class A_Family implements ISLMixNode<A_Family>
 		
 	}
 	
+	public inline function getNode():A_Node {
+		return _node;
+	}
+	
 	private function _reflectNode(node:A_Node):Void {
 		_numComponents = ComponentLookup.injectComponentsInto(node);
 		_cIndices = new IntMemory(_numComponents, _node + "_componentIndices");

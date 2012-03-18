@@ -49,7 +49,7 @@ class VectorComponent<T> implements Generic, implements IComponentDS
 	
 	/* INTERFACE hashds.game.alchemy.IComponentDS */
 	
-	public inline function free(key:Int):Void 
+	public inline function _free(key:Int):Void 
 	{
 		_availIndices.set(_ai++, key);
 	}

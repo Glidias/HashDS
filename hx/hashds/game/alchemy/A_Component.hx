@@ -33,11 +33,9 @@ class A_Component extends A_Base, implements IComponentDS
 		_init(allocateNumBlocks, allocateAvailIndices, useExistingMem, existingMem);
 	}
 	
-	public inline function _dispose(addr:Int):Void {
-		_mem.freeAddr(addr);
-	}
+
 	
-	public function free(key:Int):Void {
+	public function _free(key:Int):Void {
 		_mem.freeAddr(key);
 	}
 	

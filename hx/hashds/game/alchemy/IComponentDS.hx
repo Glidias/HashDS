@@ -8,7 +8,7 @@ package hashds.game.alchemy;
 interface IComponentDS 
 {
 
-	function free(key:Int):Void;
+	function _free(key:Int):Void;
 	function getId():Int;
 	function getName():String;
 	

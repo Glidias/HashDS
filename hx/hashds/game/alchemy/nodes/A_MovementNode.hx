@@ -12,14 +12,18 @@ import hashds.game.alchemy.components.common.A_Tuple2;
 
 class A_MovementNode extends A_Node
 {
-	@component(0,'position') public var position:A_Tuple2;
-	@component(1,'velocity') public var velocity:A_Tuple2;
-	@component(2,'rotation') public var rotation:A_Tuple2;
+	@component('position') public var position:A_Tuple2;
+	@component('velocity') public var velocity:A_Tuple2;
+	@component('rotation') public var rotation:A_Tuple2;
+	
+	@componentOrder('position', 'velocity', 'rotation')
+	public static inline function myComponents(position:A_Tuple2, velocity:A_Tuple2, rotation:A_Tuple2):Void { }
 
 	public function new() 
 	{
 		super();
 	}
+	
 	
 	// component address offset getters for systems
 	

@@ -16,9 +16,10 @@ class A_MovementNode extends A_Node
 	@component('velocity') public var velocity:A_Tuple2;
 	@component('rotation') public var rotation:A_Tuple2;
 	
-	@componentOrder('position', 'velocity', 'rotation')
-	public function myComponents(position:A_Tuple2, velocity:A_Tuple2, rotation:A_Tuple2):Void { }
-
+	override public function getOrderedComponents():Array<Dynamic> {
+		return [position, velocity, rotation];
+	}
+	
 	public function new() 
 	{
 		super();

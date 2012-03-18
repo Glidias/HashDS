@@ -2,6 +2,7 @@ package hashds.game.alchemy;
 import de.polygonal.ds.IntIntHashTable;
 import de.polygonal.ds.mem.IntMemory;
 import de.polygonal.ds.mem.MemoryAccess;
+import flash.errors.Error;
 import flash.Memory;
 
 /**
@@ -34,6 +35,11 @@ class A_Node extends A_Base
 	
 	@field public inline function getEntityHeader(addr:Int):Int {
 		return _getEntityHeader(addr);
+	}
+	
+	public function getOrderedComponents():Array<Dynamic> {
+		throw new Error("Please overwrite!");
+		return null;
 	}
 
 	

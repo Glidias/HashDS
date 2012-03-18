@@ -17,7 +17,7 @@ class A_MovementNode extends A_Node
 	@component('rotation') public var rotation:A_Tuple2;
 	
 	@componentOrder('position', 'velocity', 'rotation')
-	public static inline function myComponents(position:A_Tuple2, velocity:A_Tuple2, rotation:A_Tuple2):Void { }
+	public function myComponents(position:A_Tuple2, velocity:A_Tuple2, rotation:A_Tuple2):Void { }
 
 	public function new() 
 	{
